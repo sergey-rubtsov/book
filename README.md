@@ -55,6 +55,79 @@ This application is built using the following technologies and frameworks:
    git clone https://github.com/sergey-rubtsov/book.git
    cd book
 
+2. **Build the project**
+   ```sh
+   ./gradlew build
+   ```
+
+3. **Run the application**
+   ***With test local H2 DB***
+      ```sh
+      ./gradlew bootRun --args='--spring.profiles.active=local'
+      ```
+   ***With Postgres DB***
+      ```sh
+      ./gradlew bootRun --args='--spring.profiles.active=prod'
+      ```
+
+### Running Tests
+
+To run unit and integration tests, execute:
+```sh
+./gradlew test
+```
+
+## API Documentation
+
+The REST API is documented using OpenAPI. Once the application is running, you can access the API documentation at:
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+## Usage
+
+### Adding a Recipe
+
+- **Endpoint**: `POST /api/recipes`
+- **Request Body**:
+  ```json
+  {
+    "name": "Veggie Delight",
+    "vegetarian": true,
+    "servings": 4,
+    "ingredients": ["carrots", "potatoes", "peas"],
+    "instructions": "Boil the vegetables and mix them well."
+  }
+  ```
+
+### Updating a Recipe
+
+- **Endpoint**: `PUT /api/recipes/{id}`
+- **Request Body**:
+  ```json
+  {
+    "name": "Veggie Delight Updated",
+    "vegetarian": true,
+    "servings": 4,
+    "ingredients": ["carrots", "potatoes", "peas", "corn"],
+    "instructions": "Boil the vegetables, add corn and mix them well."
+  }
+  ```
+
+### Removing a Recipe
+
+- **Endpoint**: `DELETE /api/recipes/{id}`
+
+### Fetching Recipes
+
+- **Endpoint**: `GET /api/recipes`
+- **Query Parameters**:
+   - `vegetarian` (optional): `true` or `false`
+   - `servings` (optional): number of servings
+   - `includeIngredients` (optional): list of ingredients to include
+   - `excludeIngredients` (optional): list of ingredients to exclude
+   - `instructions` (optional): text search within instructions
+
 ### Docker Compose support
 This project contains a Docker Compose file named `compose.yaml`.
 In this file, the following services have been defined:

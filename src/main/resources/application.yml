@@ -9,6 +9,6 @@ spring:
 server:
   port: 8080
 
-spring-doc:
+springdoc:
   packagesToScan: "com.cook.book"
   pathsToMatch: "/**"
