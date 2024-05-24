@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: book
+  profiles:
+    active: local
+  flyway:
+    enabled: false
+
+server:
+  port: 8080
+
+spring-doc:
+  packagesToScan: "com.cook.book"
+  pathsToMatch: "/**"
