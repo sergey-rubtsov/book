@@ -15,6 +15,9 @@ import java.util.List;
 @Builder
 public class RecipeMessage {
 
+    @Schema(description = "The recipe id")
+    private Long id;
+
     @Schema(description = "The recipe title is case sensitive and should be unique")
     @JsonProperty(required = true)
     @NotEmpty

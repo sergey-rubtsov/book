@@ -2,14 +2,19 @@ package com.cook.book.controller;
 
 import com.cook.book.message.RecipeMessage;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @RequestMapping(value = "/api/recipes")
+@Validated
 public interface BookController {
 
     @Operation(summary = "Find recipes")
@@ -40,7 +46,7 @@ public interface BookController {
             @RequestParam(required = false) List<String> include,
             @Schema(description = "The list of excluded ingredients")
             @RequestParam(required = false) List<String> exclude,
-            @ParameterObject Pageable pageable);
+            @PageableDefault(sort = "title", direction = Sort.Direction.DESC) Pageable pageable);
 
     @PostMapping(produces = {"application/json"}, consumes = {"application/json"})
     @Operation(summary = "Add new recipe")
@@ -50,7 +56,7 @@ public interface BookController {
             @ApiResponse(responseCode = "409", description = "Conflict"),
             @ApiResponse(responseCode = "500", description = "Internal error occurred")
     })
-    ResponseEntity<RecipeMessage> createRecipe(@RequestBody RecipeMessage recipeMessage);
+    ResponseEntity<RecipeMessage> createRecipe(@Valid @RequestBody RecipeMessage recipeMessage);
 
     @PutMapping(produces = {"application/json"}, consumes = {"application/json"})
     @Operation(summary = "Update recipe")
@@ -59,7 +65,7 @@ public interface BookController {
             @ApiResponse(responseCode = "404", description = "Recipe not found"),
             @ApiResponse(responseCode = "500", description = "Internal error occurred")
     })
-    ResponseEntity<RecipeMessage> updateRecipe(@RequestParam Long id, @RequestBody RecipeMessage recipeMessage);
+    ResponseEntity<RecipeMessage> updateRecipe(@Valid @RequestBody RecipeMessage recipeMessage);
 
     @DeleteMapping("/")
     @Operation(summary = "Delete recipe by id")
