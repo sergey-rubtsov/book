@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @RequestMapping(value = "/api/recipes")
 @Validated
+@Tag(name = "Cookbook", description = "Cookbook API")
 public interface BookController {
 
     @Operation(summary = "Find recipes")
@@ -29,7 +31,6 @@ public interface BookController {
     Page<RecipeMessage> findRecipes(
         @RequestParam(required = false, defaultValue = "0") Integer page,
         @RequestParam(required = false, defaultValue = "10") Integer size,
-        @Schema(description = "The recipe title is case sensitive and unique")
         @RequestParam(required = false) String title,
         @Schema(description = "The number of servings, must be greater than zero")
         @Min(1)

@@ -65,9 +65,10 @@ This application is built using the following technologies and frameworks:
       ```sh
       ./gradlew bootRun --args='--spring.profiles.active=local'
       ```
-   ***With Postgres DB***
+   ***Using docker with Postgres DB***
       ```sh
-      ./gradlew bootRun --args='--spring.profiles.active=prod'
+        docker-compose -f docker-compose.yaml -p book up -d postgres
+        docker-compose -f docker-compose.yaml -p book up -d book
       ```
 
 ### Running Tests

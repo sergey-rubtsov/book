@@ -19,4 +19,4 @@ spring:
   flyway:
     enabled: true
     schemas: cookbook
-    locations: classpath:db.migration
+    locations: classpath:db

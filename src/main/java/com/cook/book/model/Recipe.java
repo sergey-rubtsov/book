@@ -24,7 +24,7 @@ import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REFRESH;
 
 @Data
-@Table(name = "recipes", schema="cookbook")
+//@Table(name = "recipes", schema="cookbook")
 @Entity
 @Builder
 @NoArgsConstructor

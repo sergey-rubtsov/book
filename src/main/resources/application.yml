@@ -3,12 +3,10 @@ spring:
     name: book
   profiles:
     active: local
-  flyway:
-    enabled: false
 
 server:
   port: 8080
 
 springdoc:
-  packagesToScan: "com.cook.book"
+  packagesToScan: "com.cook.book.controller"
   pathsToMatch: "/**"
