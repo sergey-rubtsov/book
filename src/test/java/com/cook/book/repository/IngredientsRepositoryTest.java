@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("test")
 class IngredientsRepositoryTest {
 
+    @Autowired
+    private IngredientsRepository ingredientsRepository;
+
     @AfterEach
     void tearDown() {
         ingredientsRepository.deleteAll();
     }
-
-    @Autowired
-    private IngredientsRepository ingredientsRepository;
 
     @Test
     void saveAndDeleteIngredient() {
@@ -38,15 +38,16 @@ class IngredientsRepositoryTest {
     @Test
     void findOneByName() {
         Ingredient potato = Ingredient.builder()
-                .name("Potato")
-                .category(Category.VEGETARIAN)
-                .build();
+                                      .name("Potato")
+                                      .category(Category.VEGETARIAN)
+                                      .build();
         ingredientsRepository.save(potato);
         Ingredient schmotato = Ingredient.builder()
-                .name("Schmotato")
-                .category(Category.MEAT)
-                .build();
+                                         .name("Schmotato")
+                                         .category(Category.MEAT)
+                                         .build();
         ingredientsRepository.save(schmotato);
-        assertTrue(ingredientsRepository.findOneByName("Schmotato").isPresent());
+        assertTrue(ingredientsRepository.findOneByName("Schmotato")
+                                        .isPresent());
     }
 }

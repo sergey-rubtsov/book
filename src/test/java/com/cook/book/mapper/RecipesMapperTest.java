@@ -33,9 +33,9 @@ class RecipesMapperTest {
                                                         .name("Potato")
                                                         .category(Category.VEGETARIAN)
                                                         .build();
-        List<IngredientMessage> ingredientMessages = new ArrayList<>();
-        ingredientMessages.add(ingredient);
-        recipe.setIngredients(ingredientMessages);
+        List<IngredientMessage> ingredientResponseMessages = new ArrayList<>();
+        ingredientResponseMessages.add(ingredient);
+        recipe.setIngredients(ingredientResponseMessages);
         Recipe entity = recipesMapper.toEntity(recipe);
         assertNotNull(entity);
     }
@@ -43,16 +43,17 @@ class RecipesMapperTest {
     @Test
     void toMessage() {
         Recipe recipe = Recipe.builder()
-                .title("Potato salad")
-                .servings(1)
-                .instructions("Some instruction")
-                .build();
+                              .title("Potato salad")
+                              .servings(1)
+                              .instructions("Some instruction")
+                              .build();
         Ingredient ingredient = Ingredient.builder()
                                           .id(42L)
                                           .name("Potato")
                                           .category(Category.VEGETARIAN)
                                           .build();
-        recipe.getIngredients().add(ingredient);
+        recipe.getIngredients()
+              .add(ingredient);
         RecipeMessage message = recipesMapper.toMessage(recipe);
         assertNotNull(message);
     }

@@ -10,5 +10,4 @@ public interface IngredientsRepository extends JpaRepository<Ingredient, Long> {
     Optional<Ingredient> findOneByName(String name);
 
     boolean existsByName(String name);
-
 }

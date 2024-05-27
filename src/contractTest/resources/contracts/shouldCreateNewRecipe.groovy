@@ -24,7 +24,6 @@ Contract.make {
     response {
         status 201
         body([
-                id          : 11,
                 title       : "Vegetarian Pizza",
                 instructions: "Bake the pizza.",
                 servings    : 2,

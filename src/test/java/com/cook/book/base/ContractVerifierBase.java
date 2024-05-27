@@ -46,8 +46,10 @@ public abstract class ContractVerifierBase {
                                       .name("Salmon")
                                       .category(Category.MEAT)
                                       .build();
-        recipe1.getIngredients().add(potato);
-        recipe1.getIngredients().add(salmon);
+        recipe1.getIngredients()
+               .add(potato);
+        recipe1.getIngredients()
+               .add(salmon);
         recipesService.createRecipe(recipe1);
 
         Ingredient justPotato = Ingredient.builder()
@@ -63,8 +65,10 @@ public abstract class ContractVerifierBase {
                                .servings(2)
                                .instructions("Some instruction 2")
                                .build();
-        recipe2.getIngredients().add(justPotato);
-        recipe2.getIngredients().add(meat);
+        recipe2.getIngredients()
+               .add(justPotato);
+        recipe2.getIngredients()
+               .add(meat);
         recipesService.createRecipe(recipe2);
 
         Recipe recipe3 = Recipe.builder()
@@ -80,8 +84,10 @@ public abstract class ContractVerifierBase {
                                            .name("Tomato Sauce")
                                            .category(Category.VEGETARIAN)
                                            .build();
-        recipe3.getIngredients().add(pasta);
-        recipe3.getIngredients().add(tomatoSauce);
+        recipe3.getIngredients()
+               .add(pasta);
+        recipe3.getIngredients()
+               .add(tomatoSauce);
         recipesService.createRecipe(recipe3);
 
         Recipe recipe4 = Recipe.builder()
@@ -97,8 +103,10 @@ public abstract class ContractVerifierBase {
                                        .name("Carrots")
                                        .category(Category.VEGETARIAN)
                                        .build();
-        recipe4.getIngredients().add(chicken);
-        recipe4.getIngredients().add(carrots);
+        recipe4.getIngredients()
+               .add(chicken);
+        recipe4.getIngredients()
+               .add(carrots);
         recipesService.createRecipe(recipe4);
 
         Recipe recipe5 = Recipe.builder()
@@ -118,9 +126,12 @@ public abstract class ContractVerifierBase {
                                            .name("Carrots")
                                            .category(Category.VEGETARIAN)
                                            .build();
-        recipe5.getIngredients().add(beef);
-        recipe5.getIngredients().add(potatoes);
-        recipe5.getIngredients().add(stewCarrots);
+        recipe5.getIngredients()
+               .add(beef);
+        recipe5.getIngredients()
+               .add(potatoes);
+        recipe5.getIngredients()
+               .add(stewCarrots);
         recipesService.createRecipe(recipe5);
 
         Recipe recipe6 = Recipe.builder()
@@ -136,8 +147,10 @@ public abstract class ContractVerifierBase {
                                       .name("Banana")
                                       .category(Category.VEGETARIAN)
                                       .build();
-        recipe6.getIngredients().add(apple);
-        recipe6.getIngredients().add(banana);
+        recipe6.getIngredients()
+               .add(apple);
+        recipe6.getIngredients()
+               .add(banana);
         recipesService.createRecipe(recipe6);
 
         Recipe recipe7 = Recipe.builder()
@@ -153,8 +166,10 @@ public abstract class ContractVerifierBase {
                                     .name("Taco")
                                     .category(Category.VEGETARIAN)
                                     .build();
-        recipe7.getIngredients().add(fish);
-        recipe7.getIngredients().add(taco);
+        recipe7.getIngredients()
+               .add(fish);
+        recipe7.getIngredients()
+               .add(taco);
         recipesService.createRecipe(recipe7);
 
         Recipe recipe8 = Recipe.builder()
@@ -174,9 +189,12 @@ public abstract class ContractVerifierBase {
                                       .name("Olives")
                                       .category(Category.VEGETARIAN)
                                       .build();
-        recipe8.getIngredients().add(cucumber);
-        recipe8.getIngredients().add(feta);
-        recipe8.getIngredients().add(olives);
+        recipe8.getIngredients()
+               .add(cucumber);
+        recipe8.getIngredients()
+               .add(feta);
+        recipe8.getIngredients()
+               .add(olives);
         recipesService.createRecipe(recipe8);
 
         Recipe recipe9 = Recipe.builder()
@@ -192,8 +210,10 @@ public abstract class ContractVerifierBase {
                                      .name("Toast")
                                      .category(Category.VEGETARIAN)
                                      .build();
-        recipe9.getIngredients().add(egg);
-        recipe9.getIngredients().add(toast);
+        recipe9.getIngredients()
+               .add(egg);
+        recipe9.getIngredients()
+               .add(toast);
         recipesService.createRecipe(recipe9);
 
         Recipe recipe10 = Recipe.builder()
@@ -209,9 +229,10 @@ public abstract class ContractVerifierBase {
                                            .name("Curry Spices")
                                            .category(Category.VEGETARIAN)
                                            .build();
-        recipe10.getIngredients().add(lamb);
-        recipe10.getIngredients().add(currySpices);
+        recipe10.getIngredients()
+                .add(lamb);
+        recipe10.getIngredients()
+                .add(currySpices);
         recipesService.createRecipe(recipe10);
     }
-
 }

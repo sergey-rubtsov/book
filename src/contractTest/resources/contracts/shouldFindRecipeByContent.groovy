@@ -9,8 +9,8 @@ Contract.make {
         method GET()
         urlPath("/api/recipes") {
             queryParameters {
-                parameter("vegetarian", "true")
-                parameter("page", "1")
+                parameter("content", "Cook beef")
+                parameter("page", "0")
                 parameter("size", "1")
             }
         }
@@ -20,13 +20,9 @@ Contract.make {
         status 200
         body([
                 [
-                        instructions: "Mix all fruits together",
-                        servings: 2,
-                        title: "Fruit Salad",
-//                        ingredients : [
-//                                [name: "Apple", "category": "VEGETARIAN"],
-//                                [name: "Banana", "category": "VEGETARIAN"]
-//                        ]
+                        instructions: "Cook beef, add potatoes and carrots",
+                        servings: 5,
+                        title: "Beef Stew"
                 ]
         ]
         )

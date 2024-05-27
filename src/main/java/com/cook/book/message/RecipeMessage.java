@@ -30,7 +30,7 @@ public class RecipeMessage {
     private Integer servings;
 
     @Schema(description = "The instructions contain quantitative measures of the ingredients and steps for " +
-            "preparing the dish. It is possible to search for a keyword in the instruction text.")
+        "preparing the dish. It is possible to search for a keyword in the instruction text.")
     @JsonProperty(required = true)
     @NotEmpty
     @NotBlank
@@ -40,5 +40,4 @@ public class RecipeMessage {
     @JsonProperty(required = true)
     @NotNull
     private List<IngredientMessage> ingredients;
-
 }

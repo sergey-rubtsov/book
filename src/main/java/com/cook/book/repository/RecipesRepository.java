@@ -11,5 +11,4 @@ public interface RecipesRepository extends JpaRepository<Recipe, Long>, JpaSpeci
     boolean existsByTitle(String title);
 
     Optional<Recipe> findOneByTitle(String title);
-
 }

@@ -20,17 +20,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ActiveProfiles("test")
 class RecipesRepositoryTest {
 
+    @Autowired
+    private RecipesRepository recipesRepository;
+    @Autowired
+    private IngredientsRepository ingredientsRepository;
+
     @AfterEach
     void tearDown() {
         recipesRepository.deleteAll();
         ingredientsRepository.deleteAll();
     }
-
-    @Autowired
-    private RecipesRepository recipesRepository;
-
-    @Autowired
-    private IngredientsRepository ingredientsRepository;
 
     @Test
     void saveRecipe() {
@@ -41,7 +40,9 @@ class RecipesRepositoryTest {
         Recipe recipe = found.get();
         assertNotNull(recipe);
         assertEquals("Potato salad", recipe.getTitle());
-        assertEquals("Potato", recipe.getIngredients().get(0).getName());
+        assertEquals("Potato", recipe.getIngredients()
+                                     .get(0)
+                                     .getName());
     }
 
     @Test
@@ -53,29 +54,31 @@ class RecipesRepositoryTest {
                                           .name("Schmotato")
                                           .category(Category.MEAT)
                                           .build();
-        recipe.getIngredients().add(ingredient);
+        recipe.getIngredients()
+              .add(ingredient);
         recipe.setServings(2);
         recipesRepository.save(recipe);
         found = recipesRepository.findById(recipeId);
         recipe = found.get();
-        assertEquals(2, recipe.getIngredients().size());
+        assertEquals(2, recipe.getIngredients()
+                              .size());
         assertEquals(2, recipe.getServings());
     }
 
     @NotNull
     private Long getRecipeId() {
         Ingredient ingredient = Ingredient.builder()
-                .name("Potato")
-                .category(Category.VEGETARIAN)
-                .build();
+                                          .name("Potato")
+                                          .category(Category.VEGETARIAN)
+                                          .build();
         Recipe recipe = Recipe.builder()
-                .title("Potato salad")
-                .servings(1)
-                .instructions("Some instruction")
-                .build();
-        recipe.getIngredients().add(ingredient);
+                              .title("Potato salad")
+                              .servings(1)
+                              .instructions("Some instruction")
+                              .build();
+        recipe.getIngredients()
+              .add(ingredient);
         recipesRepository.save(recipe);
         return recipe.getId();
     }
-
 }

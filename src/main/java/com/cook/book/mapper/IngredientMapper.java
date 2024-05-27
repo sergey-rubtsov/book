@@ -12,5 +12,4 @@ public interface IngredientMapper {
     Ingredient toEntity(IngredientMessage message);
 
     IngredientMessage toMessage(Ingredient entity);
-
 }

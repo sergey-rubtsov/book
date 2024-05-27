@@ -1,16 +1,4 @@
 spring:
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration
-  main:
-    allow-bean-definition-overriding: true
-  data:
-    web:
-      pageable:
-        page-parameter: page
-        size-parameter: page-size
-        one-indexed-parameters: true
-        default-page-size: 10
-        max-page-size: 50
   application:
     name: book
   profiles:

@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,7 @@ import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REFRESH;
 
 @Data
+@Table(name = "recipes", schema="cookbook")
 @Entity
 @Builder
 @NoArgsConstructor
@@ -45,6 +47,6 @@ public class Recipe {
 
     @Builder.Default
     @ToString.Exclude
-    @ManyToMany(cascade={PERSIST, MERGE, REFRESH, DETACH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {PERSIST, MERGE, REFRESH, DETACH}, fetch = FetchType.EAGER)
     private List<Ingredient> ingredients = new ArrayList<>();
 }

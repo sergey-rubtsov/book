@@ -25,8 +25,6 @@ import java.util.stream.Collectors;
 @Service
 public class RecipesServiceImpl implements RecipesService {
 
-    private static final int DEFAULT_PAGE_SIZE = 10;
-
     @Autowired
     private RecipesRepository recipesRepository;
 
@@ -42,8 +40,7 @@ public class RecipesServiceImpl implements RecipesService {
         List<String> exclude,
         Pageable pageable) {
         Specification<Recipe> spec = buildSpecification(title, servings, content, vegetarian, include, exclude);
-        return recipesRepository.findAll(spec, Optional.ofNullable(pageable)
-                                                       .orElse(Pageable.ofSize(DEFAULT_PAGE_SIZE)));
+        return recipesRepository.findAll(spec, pageable);
     }
 
     private Specification<Recipe> buildSpecification(String title,
@@ -54,19 +51,26 @@ public class RecipesServiceImpl implements RecipesService {
                                                      List<String> exclude) {
         return (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            Optional.ofNullable(title).ifPresent(t -> predicates.add(builder.equal(root.get("title"), t)));
-            Optional.ofNullable(servings).ifPresent(s -> predicates.add(builder.equal(root.get("servings"), s)));
-            Optional.ofNullable(content).ifPresent(s -> predicates.add(builder.like(root.get("instructions"),
-                        String.format("%%%s%%", s.toLowerCase()))));
+            Optional.ofNullable(title)
+                    .ifPresent(t -> predicates.add(builder.equal(root.get("title"), t)));
+            Optional.ofNullable(servings)
+                    .ifPresent(s -> predicates.add(builder.equal(root.get("servings"), s)));
+            Optional.ofNullable(content)
+                    .ifPresent(s -> predicates.add(builder.like(root.get("instructions"),
+                        String.format("%%%s%%", s))));
             Optional.ofNullable(vegetarian)
                     .ifPresent(veg -> {
                         if (Boolean.TRUE.equals(veg)) {
                             Subquery<Long> subQuery = query.subquery(Long.class);
                             Join<Recipe, Ingredient> join = subQuery.from(Recipe.class)
                                                                     .join("ingredients");
-                            subQuery.select(join.getParent().get("id"));
-                            subQuery.where(join.get("category").in(Category.MEAT));
-                            Predicate p = root.get("id").in(subQuery.getSelection()).not();
+                            subQuery.select(join.getParent()
+                                                .get("id"));
+                            subQuery.where(join.get("category")
+                                               .in(Category.MEAT));
+                            Predicate p = root.get("id")
+                                              .in(subQuery.getSelection())
+                                              .not();
                             predicates.add(p);
                         }
                     });
@@ -74,7 +78,8 @@ public class RecipesServiceImpl implements RecipesService {
                     .ifPresent(in -> {
                         if (!in.isEmpty()) {
                             Join<Recipe, Ingredient> join = root.join("ingredients");
-                            predicates.add(join.get("name").in(in));
+                            predicates.add(join.get("name")
+                                               .in(in));
                         }
                     });
             Optional.ofNullable(exclude)
@@ -83,9 +88,13 @@ public class RecipesServiceImpl implements RecipesService {
                             Subquery<Long> subQuery = query.subquery(Long.class);
                             Join<Recipe, Ingredient> join = subQuery.from(Recipe.class)
                                                                     .join("ingredients");
-                            subQuery.select(join.getParent().get("id"));
-                            subQuery.where(join.get("name").in(ex));
-                            Predicate p = root.get("id").in(subQuery.getSelection()).not();
+                            subQuery.select(join.getParent()
+                                                .get("id"));
+                            subQuery.where(join.get("name")
+                                               .in(ex));
+                            Predicate p = root.get("id")
+                                              .in(subQuery.getSelection())
+                                              .not();
                             predicates.add(p);
                         }
                     });
@@ -116,7 +125,7 @@ public class RecipesServiceImpl implements RecipesService {
                                               .collect(
                                                   Collectors.toCollection(ArrayList::new));
         return Optional.ofNullable(updated.getId())
-                       .map(id -> recipesRepository.findById(updated.getId()))
+                       .map(id -> recipesRepository.findById(id))
                        .orElseGet(() -> recipesRepository.findOneByTitle(updated.getTitle()))
                        .map(recipe -> {
                            recipe.setInstructions(updated.getInstructions());

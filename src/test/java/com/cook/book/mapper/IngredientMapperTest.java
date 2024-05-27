@@ -32,11 +32,10 @@ class IngredientMapperTest {
     @Test
     void toEntity() {
         IngredientMessage ingredient = IngredientMessage.builder()
-                .name("Potato")
-                .category(Category.VEGETARIAN)
-                .build();
+                                                        .name("Potato")
+                                                        .category(Category.VEGETARIAN)
+                                                        .build();
         Ingredient entity = ingredientMapper.toEntity(ingredient);
         assertNotNull(entity);
     }
-
 }

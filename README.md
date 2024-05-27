@@ -92,10 +92,13 @@ http://localhost:8080/swagger-ui/index.html
 - **Request Body**:
   ```json
   {
-    "name": "Veggie Delight",
-    "vegetarian": true,
+    "title": "Veggie Delight",
     "servings": 4,
-    "ingredients": ["carrots", "potatoes", "peas"],
+    "ingredients": [
+        {"name": "carrots", "category": "VEGETARIAN"}, 
+        {"name": "potatoes", "category": "VEGETARIAN"},
+        {"name": "peas", "category": "VEGETARIAN"}
+    ],
     "instructions": "Boil the vegetables and mix them well."
   }
   ```
@@ -103,13 +106,32 @@ http://localhost:8080/swagger-ui/index.html
 ### Updating a Recipe
 
 - **Endpoint**: `PUT /api/recipes/{id}`
-- **Request Body**:
+- **Request Body** (by title):
   ```json
   {
-    "name": "Veggie Delight Updated",
-    "vegetarian": true,
+    "title": "Veggie Delight Updated",
     "servings": 4,
-    "ingredients": ["carrots", "potatoes", "peas", "corn"],
+    "ingredients": [
+      {"name": "carrots", "category": "VEGETARIAN"}, 
+      {"name": "potatoes", "category": "VEGETARIAN"},
+      {"name": "peas", "category": "VEGETARIAN"}, 
+      {"name": "corn", "category": "VEGETARIAN"}
+    ],
+    "instructions": "Boil the vegetables, add corn and mix them well."
+  }
+  ```
+- **Request Body** (by id):
+  ```json
+  {
+    "id": 1,
+    "title": "Veggie Delight Updated",
+    "servings": 4,
+    "ingredients": [
+      {"name": "carrots", "category": "VEGETARIAN"}, 
+      {"name": "potatoes", "category": "VEGETARIAN"},
+      {"name": "peas", "category": "VEGETARIAN"}, 
+      {"name": "corn", "category": "VEGETARIAN"}
+    ],
     "instructions": "Boil the vegetables, add corn and mix them well."
   }
   ```
@@ -124,8 +146,8 @@ http://localhost:8080/swagger-ui/index.html
 - **Query Parameters**:
    - `vegetarian` (optional): `true` or `false`
    - `servings` (optional): number of servings
-   - `includeIngredients` (optional): list of ingredients to include
-   - `excludeIngredients` (optional): list of ingredients to exclude
+   - `include` (optional): list of ingredients to include
+   - `exclude` (optional): list of ingredients to exclude
    - `instructions` (optional): text search within instructions
 
 ### Docker Compose support

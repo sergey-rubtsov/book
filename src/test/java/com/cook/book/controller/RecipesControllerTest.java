@@ -26,14 +26,12 @@ import static org.mockito.Mockito.times;
 @ExtendWith(MockitoExtension.class)
 class RecipesControllerTest {
 
-    @Mock
-    private RecipesService recipesService;
-
-    @Mock
-    private RecipesMapper recipesMapper;
-
     @InjectMocks
     private final BookController testObj = new BookControllerImpl();
+    @Mock
+    private RecipesService recipesService;
+    @Mock
+    private RecipesMapper recipesMapper;
 
     @Test
     void searchRecipes() {
@@ -41,52 +39,69 @@ class RecipesControllerTest {
         recipes.add(mock(Recipe.class));
         Page<Recipe> mock = new PageImpl<>(recipes);
         Mockito.when(recipesService.findRecipes(
-                ArgumentMatchers.eq("title"),
-                ArgumentMatchers.eq(1),
-                ArgumentMatchers.eq("content"),
-                ArgumentMatchers.eq(true),
-                ArgumentMatchers.anyList(),
-                ArgumentMatchers.anyList(),
-                any(Pageable.class)
-        )).thenReturn(mock);
-        Mockito.when(recipesMapper.toMessage(any(Recipe.class))).thenReturn(mock(RecipeMessage.class));
+                   ArgumentMatchers.eq("title"),
+                   ArgumentMatchers.eq(1),
+                   ArgumentMatchers.eq("content"),
+                   ArgumentMatchers.eq(true),
+                   ArgumentMatchers.anyList(),
+                   ArgumentMatchers.anyList(),
+                   any(Pageable.class)
+               ))
+               .thenReturn(mock);
+        Mockito.when(recipesMapper.toMessage(any(Recipe.class)))
+               .thenReturn(mock(RecipeMessage.class));
         testObj.findRecipes(
-                "title",
-                1,
-                "content",
-                true,
-                List.of("include"),
-                List.of("exclude"),
-                Pageable.unpaged());
-        Mockito.verify(recipesMapper, times(1)).toMessage(any(Recipe.class));
+            1, 10,
+            "title",
+            1,
+            "content",
+            true,
+            List.of("include"),
+            List.of("exclude"));
+        Mockito.verify(recipesMapper, times(1))
+               .toMessage(any(Recipe.class));
     }
 
     @Test
     void createRecipe() {
-        Mockito.when(recipesMapper.toEntity(any(RecipeMessage.class))).thenReturn(mock(Recipe.class));
-        Mockito.when(recipesMapper.toMessage(any(Recipe.class))).thenReturn(mock(RecipeMessage.class));
-        Mockito.when(recipesService.createRecipe(any(Recipe.class))).thenReturn(mock(Recipe.class));
+        Mockito.when(recipesMapper.toEntity(any(RecipeMessage.class)))
+               .thenReturn(mock(Recipe.class));
+        Mockito.when(recipesMapper.toMessage(any(Recipe.class)))
+               .thenReturn(mock(RecipeMessage.class));
+        Mockito.when(recipesService.createRecipe(any(Recipe.class)))
+               .thenReturn(mock(Recipe.class));
         testObj.createRecipe(mock(RecipeMessage.class));
-        Mockito.verify(recipesMapper, times(1)).toMessage(any(Recipe.class));
-        Mockito.verify(recipesMapper, times(1)).toEntity(any(RecipeMessage.class));
-        Mockito.verify(recipesService, times(1)).createRecipe(any(Recipe.class));
+        Mockito.verify(recipesMapper, times(1))
+               .toMessage(any(Recipe.class));
+        Mockito.verify(recipesMapper, times(1))
+               .toEntity(any(RecipeMessage.class));
+        Mockito.verify(recipesService, times(1))
+               .createRecipe(any(Recipe.class));
     }
 
     @Test
     void updateRecipe() {
-        Mockito.when(recipesMapper.toEntity(any(RecipeMessage.class))).thenReturn(mock(Recipe.class));
-        Mockito.when(recipesMapper.toMessage(any(Recipe.class))).thenReturn(mock(RecipeMessage.class));
-        Mockito.when(recipesService.updateRecipe(any(Recipe.class))).thenReturn(mock(Recipe.class));
+        Mockito.when(recipesMapper.toEntity(any(RecipeMessage.class)))
+               .thenReturn(mock(Recipe.class));
+        Mockito.when(recipesMapper.toMessage(any(Recipe.class)))
+               .thenReturn(mock(RecipeMessage.class));
+        Mockito.when(recipesService.updateRecipe(any(Recipe.class)))
+               .thenReturn(mock(Recipe.class));
         testObj.updateRecipe(mock(RecipeMessage.class));
-        Mockito.verify(recipesMapper, times(1)).toMessage(any(Recipe.class));
-        Mockito.verify(recipesMapper, times(1)).toEntity(any(RecipeMessage.class));
-        Mockito.verify(recipesService, times(1)).updateRecipe(any(Recipe.class));
+        Mockito.verify(recipesMapper, times(1))
+               .toMessage(any(Recipe.class));
+        Mockito.verify(recipesMapper, times(1))
+               .toEntity(any(RecipeMessage.class));
+        Mockito.verify(recipesService, times(1))
+               .updateRecipe(any(Recipe.class));
     }
 
     @Test
     void deleteRecipe() {
-        doNothing().when(recipesService).deleteRecipe(1L);
+        doNothing().when(recipesService)
+                   .deleteRecipe(1L);
         testObj.deleteRecipe(1L);
-        Mockito.verify(recipesService, times(1)).deleteRecipe(1L);
+        Mockito.verify(recipesService, times(1))
+               .deleteRecipe(1L);
     }
 }

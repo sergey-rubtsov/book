@@ -19,8 +19,7 @@ public class IngredientMessage {
     private String name;
 
     @Schema(description = "The category of ingredient. If at least one ingredient is non-vegetarian, " +
-            "the entire recipe is considered non-vegetarian.", defaultValue = "MEAT")
+        "the entire recipe is considered non-vegetarian.", defaultValue = "MEAT")
     @Builder.Default
     private Category category = Category.MEAT;
-
 }
