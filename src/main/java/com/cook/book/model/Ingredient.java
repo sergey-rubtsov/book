@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-//@Table(name = "ingredients", schema="cookbook")
 @Entity
 @Builder
 @NoArgsConstructor

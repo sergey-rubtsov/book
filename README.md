@@ -152,4 +152,6 @@ http://localhost:8080/swagger-ui/index.html
    - `servings` (optional): number of servings
    - `include` (optional): list of ingredients to include
    - `exclude` (optional): list of ingredients to exclude
-   - `instructions` (optional): text search within instructions
+   - `instructions` (optional): text search within instructions, case-sensitive
+   - `page` (optional): number of page
+   - `size` (optional): number of recipes per page

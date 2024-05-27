@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +23,6 @@ import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REFRESH;
 
 @Data
-//@Table(name = "recipes", schema="cookbook")
 @Entity
 @Builder
 @NoArgsConstructor
