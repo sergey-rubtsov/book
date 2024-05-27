@@ -29,16 +29,19 @@ This application is built using the following technologies and frameworks:
 - **Spring Boot**: For building the RESTful web services
 - **Hibernate**: For ORM (Object-Relational Mapping) and database interactions
 - **H2 Database**: For in-memory database during development and testing
+- **PostgreSQL**: For production
 - **JUnit**: For unit testing
 - **Mockito**: For mocking in unit tests
-- **Spring Test**: For integration testing
+- **Spring Cloud Contract**: For integration testing
 
 ### Why These Choices?
 
 - **Spring Boot**: Simplifies the development of RESTful services and provides production-ready features out of the box.
 - **Hibernate**: Provides a powerful and flexible ORM framework.
 - **H2 Database**: Lightweight and fast in-memory database, ideal for development and testing.
+- **PostgreSQL**: Robust and reliable with advanced features for complex queries and indexing.
 - **JUnit & Mockito**: Well-known frameworks for writing and running unit tests efficiently.
+- **Spring Cloud Contract**: Generates and executes tests from contracts.
 - **Spring Test**: Integrates well with Spring Boot for comprehensive integration testing.
 
 ## Getting Started
@@ -150,9 +153,3 @@ http://localhost:8080/swagger-ui/index.html
    - `include` (optional): list of ingredients to include
    - `exclude` (optional): list of ingredients to exclude
    - `instructions` (optional): text search within instructions
-
-### Docker Compose support
-This project contains a Docker Compose file named `compose.yaml`.
-In this file, the following services have been defined:
-
-* postgres: [`postgres:latest`](https://hub.docker.com/_/postgres)
